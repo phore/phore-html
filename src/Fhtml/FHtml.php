@@ -13,8 +13,6 @@
     use Phore\Html\Elements\HtmlElement;
     use Phore\Html\Elements\HtmlElementAttachable;
     use Phore\Html\Elements\HtmlElementNode;
-    use Phore\Html\Elements\RawHtmlNode;
-    use Phore\Html\Elements\TextNode;
 
     /**
      * Class FHtml

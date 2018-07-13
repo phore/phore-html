@@ -9,7 +9,7 @@
 namespace Phore\Html\Fhtml;
 
 
-use HtmlTheme\Elements\RawHtmlNode;
+use Phore\Html\Elements\RawHtmlNode;
 
 trait _FHtmlExtraTrait
 {

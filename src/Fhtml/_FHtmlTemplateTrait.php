@@ -9,10 +9,10 @@
 namespace Phore\Html\Fhtml;
 
 
-use HtmlTheme\Elements\HtmlContainerElement;
-use HtmlTheme\Elements\HtmlElementNode;
-use HtmlTheme\Elements\RawHtmlNode;
-use HtmlTheme\Elements\TextNode;
+use Phore\Html\Elements\HtmlContainerElement;
+use Phore\Html\Elements\HtmlElementNode;
+use Phore\Html\Elements\RawHtmlNode;
+use Phore\Html\Elements\TextNode;
 
 /**
  * Trait _FHtmlTemplateTrait
