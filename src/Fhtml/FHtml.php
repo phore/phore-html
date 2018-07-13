@@ -8,14 +8,13 @@
 
     namespace Phore\Html\Fhtml;
 
-    use HtmlTheme\Elements\DocumentNode;
-    use HtmlTheme\Elements\HtmlContainerElement;
-    use HtmlTheme\Elements\HtmlElement;
-    use HtmlTheme\Elements\HtmlElementAttachable;
-    use HtmlTheme\Elements\HtmlElementNode;
-    use HtmlTheme\Elements\RawHtmlNode;
-    use HtmlTheme\Elements\TextNode;
-    use HtmlTheme\Theme;
+    use Phore\Html\Elements\DocumentNode;
+    use Phore\Html\Elements\HtmlContainerElement;
+    use Phore\Html\Elements\HtmlElement;
+    use Phore\Html\Elements\HtmlElementAttachable;
+    use Phore\Html\Elements\HtmlElementNode;
+    use Phore\Html\Elements\RawHtmlNode;
+    use Phore\Html\Elements\TextNode;
 
     /**
      * Class FHtml
@@ -25,7 +24,7 @@
      */
     class FHtml implements HtmlElementNode
     {
-        use _FHtmlExtraTrait, _FHtmlTemplateTrait, _FHtmlCallTrait;
+        use _FHtmlExtraTrait, _FHtmlTemplateTrait;
 
         /**
          * @var DocumentNode
