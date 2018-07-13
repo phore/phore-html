@@ -1,0 +1,31 @@
+{
+  "name": "phore/html",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Matthias Leuffen",
+      "email": "leuffen@continue.de"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Phore\\Html": "src/"
+    },
+    "files": [
+      "src/functions.inc.php"
+    ]
+  },
+  "require": {
+    "php" : ">7.0",
+    "ext-pcre": "*"
+  },
+  "require-dev": {
+    "phore/micro-app": "dev-master",
+    "psr/http-message": "^1.0",
+    "erusev/parsedown-extra": "^0.7.1"
+  },
+  "suggest": {
+    "erusev/parsedown-extra": "required to use markdown() methods"
+  }
+}
