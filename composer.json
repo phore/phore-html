@@ -10,7 +10,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "Phore\\Html": "src/"
+      "Phore\\Html\\": "src/"
     },
     "files": [
       "src/functions.inc.php"
