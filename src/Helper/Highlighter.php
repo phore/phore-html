@@ -17,13 +17,19 @@ class Highlighter
 
     public function __construct()
     {
+        $this->start_recording();
+    }
+
+    
+    public function start_recording()
+    {
         $backtrace = debug_backtrace()[0];
         $this->file = $backtrace["file"];
         $this->startNo = $backtrace["line"];
     }
-
-
-    public function getCode() : string
+    
+    
+    public function end_recording() : string 
     {
         $backtrace = debug_backtrace()[0];
         $endLine = $backtrace["line"]-1;
@@ -34,6 +40,12 @@ class Highlighter
         for ($i=$this->startNo; $i<$endLine; $i++)
             $ret[] = $data[$i];
         return "\n" . implode("", $ret);
+    }
+    
+
+    public function getCode() : string
+    {
+        return $this->end_recording();
     }
 
 }
