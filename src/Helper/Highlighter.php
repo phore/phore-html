@@ -14,7 +14,8 @@ class Highlighter
 
     private $file;
     private $startNo;
-
+    private $code;
+    
     public function __construct()
     {
         $this->start_recording();
@@ -39,13 +40,13 @@ class Highlighter
         $ret = [];
         for ($i=$this->startNo; $i<$endLine; $i++)
             $ret[] = $data[$i];
-        return "\n" . implode("", $ret);
+        return $this->code = "\n" . implode("", $ret);
     }
     
 
     public function getCode() : string
     {
-        return $this->end_recording();
+        return $this->code;
     }
 
 }
