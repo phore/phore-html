@@ -18,7 +18,10 @@ class Highlighter
     
     public function __construct()
     {
-        $this->start_recording();
+        $backtrace = debug_backtrace()[0];
+        $this->file = $backtrace["file"];
+        $this->startNo = $backtrace["line"];
+        $this->code = null;
     }
 
     
