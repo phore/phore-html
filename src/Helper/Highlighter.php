@@ -44,7 +44,7 @@ class Highlighter
         $ret = [];
         for ($i=$this->startNo; $i<$endLine; $i++)
             $ret[] = $data[$i];
-        return $this->code = "\n" . implode("", $ret);
+        return $this->code = rtrim(implode("", $ret));
     }
     
 
