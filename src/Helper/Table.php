@@ -24,7 +24,7 @@ class Table implements HtmlElementNode
 
     private $source = null;
 
-    protected function __construct($header)
+    public function __construct($header)
     {
         $this->header = $header;
     }
