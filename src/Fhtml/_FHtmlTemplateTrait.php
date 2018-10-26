@@ -26,7 +26,7 @@ trait _FHtmlTemplateTrait
 
     private function _addStructRecursive ($node, FHtml $pointer) : void
     {
-        if ($node instanceof RawHtmlNode) {
+        if ($node instanceof HtmlElementNode) {
             $pointer->curNode->add($node);
             return;
         }
@@ -49,10 +49,14 @@ trait _FHtmlTemplateTrait
                 $this->_addStructRecursive($value, $pointer->elem($key));
                 //if ($pointer->curNode !== $pointer->documentNode)
                 //    $pointer->end();
+                continue;
             }
             if (is_int($key)) {
                 $this->_addStructRecursive($value, $pointer);
+                continue;
             }
+            if ($value instanceof HtmlElementNode)
+                $pointer->curNode->add($value);
         }
         return;
     }
