@@ -30,3 +30,14 @@ $doc->tpl([
 ]);
 ```
 
+## Appending to Templates
+
+Use the array append syntax (`$template[] =`) to append elements to 
+an existing element:
+
+```
+$t = fhtml();
+
+$t[] = ["@h1" => "Hello World"];
+
+```

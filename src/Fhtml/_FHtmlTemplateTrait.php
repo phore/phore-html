@@ -61,7 +61,7 @@ trait _FHtmlTemplateTrait
         return;
     }
 
-    public function tpl(array $input) : self
+    public function tpl($input) : self
     {
         $this->_addStructRecursive($input, $this);
         return $this;
