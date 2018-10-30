@@ -32,8 +32,7 @@ trait _FHtmlTemplateTrait
         }
         if (is_callable($node)) {
             $ret = $node($pointer);
-            if ($ret instanceof HtmlElementNode)
-                $pointer->curNode->add($ret);
+            $pointer->tpl($ret);
             return;
         }
         if (is_string($node)) {
@@ -55,8 +54,12 @@ trait _FHtmlTemplateTrait
                 $this->_addStructRecursive($value, $pointer);
                 continue;
             }
-            if ($value instanceof HtmlElementNode)
+            if ($value instanceof HtmlElementNode) {
                 $pointer->curNode->add($value);
+                continue;
+            }
+            throw new \InvalidArgumentException("Cannot append node '$key'");
+
         }
         return;
     }

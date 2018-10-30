@@ -339,7 +339,7 @@
         {
             if ($offset !== null)
                 throw new \InvalidArgumentException("Altering using Array access not impemented yet");
-            $this->content(fhtml()->tpl($value));
+            $this->tpl($value);
         }
 
         /**
