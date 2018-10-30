@@ -50,9 +50,4 @@ trait _FHtmlExtraTrait
             throw new \InvalidArgumentException("Cannot read '$filename'.");
         return self::markdown($text);
     }
-
-    public static function Text(string $input) : RawHtmlNode
-    {
-        return new RawHtmlNode(htmlentities($input));
-    }
 }

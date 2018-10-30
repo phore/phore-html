@@ -157,24 +157,24 @@
 
             if ( ! $child instanceof HtmlElementNode) {
                 $child = (string)$child;
-                $child = self::Text($child);
+                $child = new TextNode($child);
             }
             $this->curNode->add($child);
             return $this;
         }
-        
+
         public function text(string $textContent) : self
         {
             $this->curNode->add(new TextNode($textContent));
             return $this;
         }
-        
+
         public function html__unescaped__(string $rawHtmlContent) : self
         {
             $this->curNode->add(new RawHtmlNode($rawHtmlContent));
             return $this;
         }
-        
+
         private function cloneit ($curNode) : FHtml
         {
             $new = new self();
