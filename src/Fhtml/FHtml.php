@@ -13,6 +13,8 @@
     use Phore\Html\Elements\HtmlElement;
     use Phore\Html\Elements\HtmlElementAttachable;
     use Phore\Html\Elements\HtmlElementNode;
+    use Phore\Html\Elements\RawHtmlNode;
+    use Phore\Html\Elements\TextNode;
 
     /**
      * Class FHtml
@@ -160,7 +162,19 @@
             $this->curNode->add($child);
             return $this;
         }
-
+        
+        public function text(string $textContent) : self
+        {
+            $this->curNode->add(new TextNode($textContent));
+            return $this;
+        }
+        
+        public function html__unescaped__(string $rawHtmlContent) : self
+        {
+            $this->curNode->add(new RawHtmlNode($rawHtmlContent));
+            return $this;
+        }
+        
         private function cloneit ($curNode) : FHtml
         {
             $new = new self();
@@ -320,7 +334,9 @@
          */
         public function offsetGet($offset)
         {
-            return fhtml($offset);
+            $fhtml = fhtml($offset);
+            $this->content($fhtml);
+            return $fhtml;
         }
 
         /**
@@ -337,8 +353,11 @@
          */
         public function offsetSet($offset, $value)
         {
-            if ($offset !== null)
-                throw new \InvalidArgumentException("Altering using Array access not impemented yet");
+            if ($offset !== null) {
+                $elem = $this->elem($offset);
+                $elem->tpl($value);
+                return;
+            }
             $this->tpl($value);
         }
 
