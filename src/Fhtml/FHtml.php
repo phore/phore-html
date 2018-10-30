@@ -315,12 +315,12 @@
          * @param mixed $offset <p>
          * The offset to retrieve.
          * </p>
-         * @return mixed Can return all value types.
+         * @return FHtml
          * @since 5.0.0
          */
         public function offsetGet($offset)
         {
-            throw new \InvalidArgumentException("Not implemented yet");
+            return fhtml($offset);
         }
 
         /**
