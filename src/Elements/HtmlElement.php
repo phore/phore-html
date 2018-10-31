@@ -97,7 +97,11 @@ class HtmlElement implements HtmlElementNode
 
     public function render ($indent="  ", $index = 0) : string
     {
-        $ii = str_repeat($indent, $index);
-        return "\n{$ii}<{$this->tag}{$this->renderAttrs($this->attrs)}/>";
+        $pre = "";
+        if ($indent !== false) {
+            $ii = str_repeat($indent, $index);
+            $pre = "\n$ii";
+        }
+        return "{$pre}<{$this->tag}{$this->renderAttrs($this->attrs)}/>";
     }
 }

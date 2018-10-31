@@ -63,9 +63,13 @@ class HtmlContainerElement extends HtmlElement
 
     public function render($indent = "  ", $index=0): string
     {
-        $ii = str_repeat($indent, $index);
+        $block = "";
+        if ($indent !== false) {
+            $ii = str_repeat($indent, $index);
+            $block = "\n$ii";
+        }
 
-        $block = "\n$ii<{$this->tag}{$this->renderAttrs($this->attrs)}>";
+        $block .= "<{$this->tag}{$this->renderAttrs($this->attrs)}>";
         if (count ($this->children) === 0)
             return $block . "</{$this->tag}>";
 
@@ -74,7 +78,7 @@ class HtmlContainerElement extends HtmlElement
             $childContent .= $curChild->render($indent, $index + 1);
         }
         $block .= $childContent;
-        if (strpos($childContent, "\n") !== false) {
+        if (strpos($childContent, "\n") !== false && $indent !== false) {
             $block .= "\n$ii";
         }
         $block .= "</{$this->tag}>";

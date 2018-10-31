@@ -53,6 +53,15 @@ class DocumentNode extends HtmlContainerElement
         $this->processingInstruction = $data;
     }
 
+    /**
+     *
+     * Parameter1:
+     *  - if null: no indention or line-feed at all.
+     *
+     * @param string $indent
+     * @param int $index
+     * @return string
+     */
     public function render($indent = "  ", $index = 0): string
     {
         $ret = $this->processingInstruction;

@@ -204,6 +204,16 @@
             return "<!doctype html>" . $this->render();
         }
 
+        /**
+         * Generate HTML Output
+         *
+         * Parameter 1:
+         *      Indent: if false no indention/linefeed is done
+         *
+         * @param string $indent
+         * @param int $index
+         * @return string
+         */
         public function render($indent = "  ", $index = 0): string
         {
             return $this->documentNode->render($indent, $index);
@@ -288,6 +298,12 @@
             }
 
             return $this;
+        }
+
+
+        public function getNode() : HtmlElement
+        {
+            return $this->curNode;
         }
 
 
