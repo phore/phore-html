@@ -334,6 +334,9 @@
          */
         public function offsetGet($offset)
         {
+            if (substr($offset, 0, 1) === "?") {
+                return $this->query(trim (substr($offset, 1)));
+            }
             $fhtml = fhtml($offset);
             $this->content($fhtml);
             return $fhtml;
