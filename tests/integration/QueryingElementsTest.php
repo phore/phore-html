@@ -17,12 +17,61 @@ class QueryingElementsTest extends TestCase
 
     public function testQueryIdElements ()
     {
-        $doc = fhtml("html");
-        $div = $doc->elem("div @id=abc");
+        $doc = fhtml([
+                "html @id=ccd" => [
+                    "div @id=abc" => FE
+                ]
+            ]
+        );
 
-        $this->assertEquals($div->getNode(), $doc->query("#abc")->getNode());
-        $this->assertEquals($div->getNode(), $doc["?#abc"]->getNode());
+        $this->assertEquals("div", $doc->query("#abc")->getNode()->getTag());
+        $this->assertEquals("div", $doc["?#abc"]->getNode()->getTag());
+    }
+
+    public function testQueryIdOnAddedTemplate()
+    {
+        $doc = fhtml("div");
+        $doc[] = [
+            "p @id=abc" => "x"
+        ];
+
+        $this->assertEquals(
+            "p",
+            $doc["?#abc"]->getNode()->getTag()
+        );
+    }
+
+
+    public function testQueryFindsSelfContainerElement()
+    {
+        $elem = fhtml("div @id=abc");
+        $this->assertEquals(
+            "div",
+            $elem["?#abc"]->getNode()->getTag()
+        );
+    }
+
+    public function testQueryFindsSelfSimpleElement()
+    {
+        $elem = fhtml("img @id=abc");
+        $this->assertEquals(
+            "img",
+            $elem["?#abc"]->getNode()->getTag()
+        );
+    }
+
+    public function testIdIndexIsWorkingOnElements()
+    {
+        $elem = fhtml("div");
+        $elem[] = fhtml("div @id=abc");
+
+        $this->assertEquals(
+            "div",
+            $elem["?#abc"]->getNode()->getTag()
+        );
     }
 
 
 }
+
+

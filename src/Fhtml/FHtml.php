@@ -43,13 +43,18 @@
 
         protected $emptyTags = ["meta"=>true, "img"=>true, "br"=>true, "hr"=>true, "input"=>true, "link"=>true];
 
-        public function __construct(array $template=null)
+        public function __construct($elementDef=null, $arguments=[])
         {
             $this->documentNode = new DocumentNode();
             $this->curNode = $this->documentNode;
 
-            if ($template !== null)
-                $this->tpl($template);
+            if (is_string($elementDef)) {
+                $elem = $this->elem($elementDef, $arguments);
+                $this->curNode = $elem->curNode;
+
+            }
+            if (is_array($elementDef))
+                $this->tpl($elementDef, $arguments);
         }
 
 
@@ -125,17 +130,8 @@
          * @param array $arrayArgs
          * @return FHtml
          */
-        public function elem(string $elemDef, $arrayArgs=[]) : self
+        protected function elem(string $elemDef, $arrayArgs=[]) : self
         {
-            if (strpos($elemDef, ">") !== false) {
-                // Multi-Element
-                $curElem = $this;
-                foreach (explode(">", $elemDef) as $curDef) {
-                    $curElem = $curElem->elem(trim ($curDef));
-                }
-                return $curElem;
-            }
-
             [$tagName, $attrs] = $this->_parseElem($elemDef, $arrayArgs);
 
             if (isset ($this->emptyTags[$tagName])) {
@@ -148,7 +144,7 @@
         }
 
 
-        public function content($child) : self
+        protected function content($child) : self
         {
             if ($child === null)
                 return $this;
@@ -163,13 +159,13 @@
             return $this;
         }
 
-        public function text(string $textContent) : self
+        protected function text(string $textContent) : self
         {
             $this->curNode->add(new TextNode($textContent));
             return $this;
         }
 
-        public function html__unescaped__(string $rawHtmlContent) : self
+        protected function html__unescaped__(string $rawHtmlContent) : self
         {
             $this->curNode->add(new RawHtmlNode($rawHtmlContent));
             return $this;
@@ -183,7 +179,7 @@
             return $new;
         }
 
-        public function end() : self
+        protected function end() : self
         {
             if ($this->curNode->getParent() === $this->curNode)
                 throw new \InvalidArgumentException("end(): Node is document node.");
@@ -229,7 +225,7 @@
          *
          * @return FHtml
          */
-        public function empty() : self
+        public function clear() : self
         {
             if ($this->curNode instanceof HtmlContainerElement)
                 $this->curNode->clearChildren();
@@ -307,12 +303,6 @@
         }
 
 
-        public function macro(FHtmlMacro $macro) : self
-        {
-            return $macro->onAttach($this);
-        }
-
-
         public function _setParent(HtmlContainerElement $parent)
         {
             $this->parent = $parent;
@@ -372,12 +362,19 @@
          */
         public function offsetSet($offset, $value)
         {
+            $elem = $this;
             if ($offset !== null) {
                 $elem = $this->elem($offset);
-                $elem->tpl($value);
+            }
+            if (is_array($value)) {
+                $elem->tpl($value, []);
                 return;
             }
-            $this->tpl($value);
+            if ($value instanceof FHtml) {
+                $this->curNode->add($value->getDocument());
+                return;
+            }
+            $elem->content($value);
         }
 
         /**

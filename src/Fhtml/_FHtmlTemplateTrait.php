@@ -24,7 +24,7 @@ use Phore\Html\Elements\TextNode;
 trait _FHtmlTemplateTrait
 {
 
-    private function _addStructRecursive ($node, FHtml $pointer) : void
+    private function _addStructRecursive ($node, FHtml $pointer, array $arguments) : void
     {
         if ($node instanceof HtmlElementNode) {
             $pointer->curNode->add($node);
@@ -32,7 +32,7 @@ trait _FHtmlTemplateTrait
         }
         if (is_callable($node)) {
             $ret = $node($pointer);
-            $pointer->tpl($ret);
+            $pointer->tpl($ret, $arguments);
             return;
         }
         if (is_string($node)) {
@@ -45,13 +45,13 @@ trait _FHtmlTemplateTrait
 
         foreach ($node as $key => $value) {
             if (is_string($key)) {
-                $this->_addStructRecursive($value, $pointer->elem($key));
+                $this->_addStructRecursive($value, $pointer->elem($key, $arguments), $arguments);
                 //if ($pointer->curNode !== $pointer->documentNode)
                 //    $pointer->end();
                 continue;
             }
             if (is_int($key)) {
-                $this->_addStructRecursive($value, $pointer);
+                $this->_addStructRecursive($value, $pointer, $arguments);
                 continue;
             }
             if ($value instanceof HtmlElementNode) {
@@ -64,9 +64,9 @@ trait _FHtmlTemplateTrait
         return;
     }
 
-    public function tpl($input) : self
+    protected function tpl($input, array $arguments) : self
     {
-        $this->_addStructRecursive($input, $this);
+        $this->_addStructRecursive($input, $this, $arguments);
         return $this;
     }
 }

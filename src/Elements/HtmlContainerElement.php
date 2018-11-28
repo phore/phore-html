@@ -22,15 +22,15 @@ class HtmlContainerElement extends HtmlElement
         $this->children[] = $child;
         $child->_setParent($this);
 
-        if ($child instanceof DocumentNode) {
-            $this->getRootDocument()->__addToIndex($child);
-            return;
-        }
+        if ($child instanceof HtmlContainerElement)
+            $this->getRootDocument()->__addToIndex($child->getDocument());
+
         if ($child instanceof HtmlElement) {
             $id = $child->getAttrib("id");
             if ($id !== null)
                 $this->getRootDocument()->__addToIndex($child);
         }
+
     }
 
     /**

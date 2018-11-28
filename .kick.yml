@@ -8,4 +8,4 @@ command:
     - "composer update"
 
   test:
-    - "phpunit /opt/tests"
+    - "phpunit --testdox /opt/tests"

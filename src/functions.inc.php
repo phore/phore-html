@@ -8,10 +8,15 @@
 
 
 function fhtml($elem=null, $params=[]) : \Phore\Html\Fhtml\FHtml {
-    if ($elem === null)
-        return new \Phore\Html\Fhtml\FHtml();
-    if (is_array($elem))
-        return (new \Phore\Html\Fhtml\FHtml($elem));
-    return (new \Phore\Html\Fhtml\FHtml())->elem($elem, $params);
+    /*
+    if (is_string($elem)) {
+        return (new \Phore\Html\Fhtml\FHtml())->elem($elem, $params);
+    }
+    */
+    return new \Phore\Html\Fhtml\FHtml($elem, $params);
 }
 
+/**
+ * FHTML Empty Element
+ */
+define("FE", null);

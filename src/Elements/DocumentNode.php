@@ -36,7 +36,7 @@ class DocumentNode extends HtmlContainerElement
         }
     }
 
-    public function getElementById ($id) : HtmlContainerElement
+    public function getElementById ($id) : HtmlElement
     {
         if ( ! isset ($this->indexById[$id]))
             throw new \InvalidArgumentException("Query element id '$id': No element found.");
