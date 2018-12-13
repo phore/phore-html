@@ -44,7 +44,7 @@ class Highlighter
         $ret = [];
         for ($i=$this->startNo; $i<$endLine; $i++)
             $ret[] = $data[$i];
-        return $this->code = rtrim(implode("", $ret));
+        return $this->code = phore_text_unindent(implode("", $ret));
     }
     
 
