@@ -68,15 +68,15 @@ class Table implements HtmlElementNode
         if ($this->source !== null)
             ($this->source)($this);
         $table = fhtml("table @class=:table", $this->cssStyles);
-        $headTr = $table->elem("thead")->elem("tr");
+        $headTr = $table["thead"]["tr"];
         foreach ($this->header as $cur) {
-            $headTr->elem("td")->content($cur);
+            $headTr[] = ["td" => $cur];
         }
-        $tbody = $table->elem("tbody");
+        $tbody = $table["tbody"];
         foreach ($this->rows as $row) {
-            $tr = $tbody->elem("tr $row[1]", $row[2]);
+            $tr = $tbody["tr $row[1]"] = $row[2];
             foreach ($row[0] as $col) {
-                $tr->elem("td")->content($col);
+                $tr[] = ["td" => $col];
             }
         }
         return $table->render($indent, $index);
