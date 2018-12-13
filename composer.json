@@ -2,6 +2,7 @@
   "name": "phore/html",
   "type": "library",
   "license": "MIT",
+  "description": "Fluent HTML Template api",
   "authors": [
     {
       "name": "Matthias Leuffen",
