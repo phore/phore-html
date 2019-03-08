@@ -72,4 +72,16 @@ class CreatingElementsTest extends TestCase
         ], ["class" => "x"]);
         $this->assertEquals('<p class="x">b</p>', $doc->render(false));
     }
+
+
+    public function testAppendElementToIndexCreateElement()
+    {
+        $ob = fhtml("tr");
+        $ob["td"] = fhtml(["elem" => "content"]);
+
+
+        $this->assertEquals('<tr><td><elem>content</elem></td></tr>', $ob->render(false));
+        echo $ob->render();
+
+    }
 }

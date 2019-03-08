@@ -371,7 +371,7 @@
                 return;
             }
             if ($value instanceof FHtml) {
-                $this->curNode->add($value->getDocument());
+                $elem->curNode->add($value->getDocument());
                 return;
             }
             $elem->content($value);
