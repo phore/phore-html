@@ -30,9 +30,9 @@ trait _FHtmlExtraTrait
             if (is_int($key))
                 $key = $value;
             if ($selected == $key)
-                $this->elem("option @value=? @selected=selected", $key)->text($value)->end();
+                $this->elem("option @value=? @selected=selected", [$key])->text($value)->end();
             else
-                $this->elem("option @value=?", $key)->text($value)->end();
+                $this->elem("option @value=?", [$key])->text($value)->end();
         }
         return $this;
     }
