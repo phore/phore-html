@@ -27,10 +27,12 @@ trait _FHtmlExtraTrait
      */
     public function options(array $options, string $selected=null) : self {
         foreach ($options as $key => $value) {
+            if (is_int($key))
+                $key = $value;
             if ($selected == $key)
                 $this->elem("option @value=? @selected=selected", $key)->text($value)->end();
             else
-                $this->elem("option @value=?", $key);
+                $this->elem("option @value=?", $key)->text($value)->end();
         }
         return $this;
     }
