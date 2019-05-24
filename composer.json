@@ -3,10 +3,11 @@
   "type": "library",
   "license": "MIT",
   "description": "Fluent HTML Template api",
+  "homepage": "https://infracamp.org/phore/",
   "authors": [
     {
       "name": "Matthias Leuffen",
-      "email": "leuffen@continue.de"
+      "email": "m@tth.es"
     }
   ],
   "autoload": {
