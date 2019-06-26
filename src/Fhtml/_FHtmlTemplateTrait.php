@@ -35,7 +35,7 @@ trait _FHtmlTemplateTrait
             $pointer->tpl($ret, $arguments);
             return;
         }
-        if (is_string($node)) {
+        if (is_string($node)  || is_int($node) || is_float($node)) {
             if ($pointer->curNode instanceof HtmlContainerElement)
                 $pointer->curNode->add(new TextNode($node));
             return;
