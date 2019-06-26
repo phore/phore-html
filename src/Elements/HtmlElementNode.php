@@ -18,6 +18,5 @@ interface HtmlElementNode
 
     public function getParent() : HtmlContainerElement;
 
-    public function debugGetPath();
 
 }

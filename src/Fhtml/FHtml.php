@@ -391,9 +391,4 @@
             throw new \InvalidArgumentException("Not implemented yet");
         }
 
-
-        public function debugGetPath()
-        {
-            return $this->getNode()->debugGetPath();
-        }
     }
