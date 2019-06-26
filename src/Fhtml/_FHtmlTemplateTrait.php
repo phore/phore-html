@@ -24,7 +24,7 @@ use Phore\Html\Elements\TextNode;
 trait _FHtmlTemplateTrait
 {
 
-    private function _addStructRecursive ($node, FHtml $pointer, array $arguments) : void
+    private function _addStructRecursive ($node, FHtml $pointer, array $arguments, array $path=[]) : void
     {
         if ($node instanceof HtmlElementNode) {
             $pointer->curNode->add($node);
@@ -43,14 +43,19 @@ trait _FHtmlTemplateTrait
         if ($node === null || $node === false )
             return;
 
+        if ( ! is_array($node))
+            throw new \InvalidArgumentException("Invalid node: '" . print_r ($node, true) . "' (not an array) in element " . implode (" > ", $path) );
+
         foreach ($node as $key => $value) {
             if (is_string($key)) {
-                $this->_addStructRecursive($value, $pointer->elem($key, $arguments), $arguments);
+                $path[] = $key;
+                $this->_addStructRecursive($value, $pointer->elem($key, $arguments), $arguments, $path);
                 //if ($pointer->curNode !== $pointer->documentNode)
                 //    $pointer->end();
                 continue;
             }
             if (is_int($key)) {
+                $path[] = $key;
                 $this->_addStructRecursive($value, $pointer, $arguments);
                 continue;
             }

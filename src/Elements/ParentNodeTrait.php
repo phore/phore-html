@@ -36,4 +36,12 @@ trait ParentNodeTrait
             return $this;
         return $this->getParent()->getDocument();
     }
+
+
+    public function debugGetPath() : array
+    {
+        if ($this->parent === $this || $this instanceof DocumentNode)
+            return [$this->tag];
+        return $this->getParent()->debugGetPath();
+    }
 }

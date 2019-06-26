@@ -392,4 +392,8 @@
         }
 
 
+        public function debugGetPath()
+        {
+            return $this->getNode()->debugGetPath();
+        }
     }
