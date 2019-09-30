@@ -30,7 +30,7 @@ trait _FHtmlTemplateTrait
             $pointer->curNode->add($node);
             return;
         }
-        if (is_callable($node)) {
+        if ($node instanceof \Closure) {
             $ret = $node($pointer);
             $pointer->tpl($ret, $arguments);
             return;
