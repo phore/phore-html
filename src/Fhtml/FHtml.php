@@ -377,6 +377,19 @@
             $elem->content($value);
         }
 
+
+        /**
+         * Load template directly from HTML File
+         * 
+         * @param string $filename
+         * @return $this
+         */
+        public function loadHtml(string $filename)
+        {
+            $this[] = new RawHtmlNode(file_get_contents($filename));
+            return $this;
+        }
+
         /**
          * Offset to unset
          * @link http://php.net/manual/en/arrayaccess.offsetunset.php
