@@ -324,7 +324,7 @@
          * The return value will be casted to boolean if non-boolean was returned.
          * @since 5.0.0
          */
-        public function offsetExists($offset)
+        public function offsetExists($offset) : bool
         {
             throw new \InvalidArgumentException("Not implemented yet");
         }
@@ -338,7 +338,7 @@
          * @return FHtml
          * @since 5.0.0
          */
-        public function offsetGet($offset)
+        public function offsetGet($offset) : mixed
         {
             if (substr($offset, 0, 1) === "?") {
                 return $this->query(trim (substr($offset, 1)));
@@ -360,7 +360,7 @@
          * @return void
          * @since 5.0.0
          */
-        public function offsetSet($offset, $value)
+        public function offsetSet(mixed $offset, mixed $value) : void
         {
             $elem = $this;
             if ($offset !== null) {
@@ -399,7 +399,7 @@
          * @return void
          * @since 5.0.0
          */
-        public function offsetUnset($offset)
+        public function offsetUnset(mixed $offset) : void
         {
             throw new \InvalidArgumentException("Not implemented yet");
         }
